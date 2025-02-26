@@ -1,42 +1,40 @@
 import {
-  Image,
-  Center,
-  Flex,
-  Heading,
-  Text,
-  Input,
-  Button,
-  useColorModeValue,
-  HStack,
-  VStack,
-  Checkbox,
-  Icon,
-} from "@hope-ui/solid"
-import { createMemo, createSignal, Show, onMount } from "solid-js"
-import { SwitchColorMode, SwitchLanguageWhite } from "~/components"
-import { useFetch, useT, useTitle, useRouter } from "~/hooks"
-import {
-  changeToken,
-  r,
-  notify,
-  handleRespWithoutNotify,
-  base_path,
-  handleResp,
-  hashPwd,
-} from "~/utils"
-import { PResp, Resp } from "~/types"
-import LoginBg from "./LoginBg"
-import { createStorageSignal } from "@solid-primitives/storage"
-import { getSetting, getSettingBool } from "~/store"
-import { SSOLogin } from "./SSOLogin"
-import { IoFingerPrint } from "solid-icons/io"
-import {
-  parseRequestOptionsFromJSON,
-  get,
   AuthenticationPublicKeyCredential,
-  supported,
   CredentialRequestOptionsJSON,
+  get,
+  parseRequestOptionsFromJSON,
+  supported,
 } from "@github/webauthn-json/browser-ponyfill"
+import {
+  Button,
+  Center,
+  Checkbox,
+  Flex,
+  HStack,
+  Icon,
+  Input,
+  Text,
+  useColorModeValue,
+  VStack,
+} from "@hope-ui/solid"
+import { createStorageSignal } from "@solid-primitives/storage"
+import { IoFingerPrint } from "solid-icons/io"
+import { createMemo, createSignal, onMount, Show } from "solid-js"
+import { SwitchColorMode, SwitchLanguageWhite } from "~/components"
+import { useFetch, useRouter, useT, useTitle } from "~/hooks"
+import { getSetting, getSettingBool } from "~/store"
+import { PResp, Resp } from "~/types"
+import {
+  base_path,
+  changeToken,
+  handleResp,
+  handleRespWithoutNotify,
+  hashPwd,
+  notify,
+  r,
+} from "~/utils"
+import LoginBg from "./LoginBg"
+import { SSOLogin } from "./SSOLogin"
 
 const Login = () => {
   const logos = getSetting("logo").split("\n")
@@ -213,12 +211,6 @@ const Login = () => {
         }}
         spacing="$4"
       >
-        <Flex alignItems="center" justifyContent="space-around">
-          <Image mr="$2" boxSize="$12" src={logo()} />
-          <Heading color="$info9" fontSize="$2xl">
-            {title()}
-          </Heading>
-        </Flex>
         <Show
           when={!needOpt()}
           fallback={
